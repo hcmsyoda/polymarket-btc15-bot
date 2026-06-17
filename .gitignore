@@ -1,0 +1,26 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+logs15/
+*.csv
+*.log
+.DS_Store
+
+# Tor binary
+tor/
+
+# Temporary debugging scripts
+check_*.py
+debug_*.sh
+test_rpc.sh
+test_clob.py
+test_telegram.py
+inspect_*.py
+full_balance_check.py
+tor_check_*.py
+setup_telegram.py
+run_dry.sh
