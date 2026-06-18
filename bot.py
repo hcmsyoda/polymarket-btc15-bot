@@ -61,17 +61,17 @@ class PolyBot:
         self.strategy_config = StrategyConfig(
             min_edge=float(os.getenv("MIN_EDGE", "0.25")),
             min_prob=float(os.getenv("MIN_PROB", "0.80")),
-            max_price=float(os.getenv("MAX_PRICE", "0.60")),
+            max_price=float(os.getenv("MAX_PRICE", "0.90")),
             min_btc_delta=float(os.getenv("MIN_BTC_DELTA", "0.06")),
-            entry_window_start=int(os.getenv("ENTRY_WINDOW_START", "10")),
-            entry_window_end=int(os.getenv("ENTRY_WINDOW_END", "5")),
-            kelly_fraction=float(os.getenv("KELLY_FRACTION", "0.10")),
+            entry_window_start=int(os.getenv("ENTRY_WINDOW_START", "60")),
+            entry_window_end=int(os.getenv("ENTRY_WINDOW_END", "10")),
+            kelly_fraction=float(os.getenv("KELLY_FRACTION", "0.15")),
             min_bet=float(os.getenv("MIN_BET", "2.0")),
             max_bet=float(os.getenv("MAX_BET", "5.0")),
         )
 
         initial_bankroll = float(os.getenv("BANKROLL", "100.0"))
-        self._daily_loss_limit = float(os.getenv("DAILY_LOSS_LIMIT", "30.0"))
+        self._daily_loss_limit = float(os.getenv("DAILY_LOSS_LIMIT", "50.0"))
         self._rolling_vol_windows = int(os.getenv("ROLLING_VOL_WINDOWS", "4"))  # 4 windows = 1hr (15m each)
         self._vol_floor = float(os.getenv("VOL_FLOOR", "0.06"))
         self._vol_cap = float(os.getenv("VOL_CAP", "0.30"))
@@ -79,7 +79,7 @@ class PolyBot:
 
         # Regime filter — sit out when market is consistently expensive
         self._rolling_price_windows = int(os.getenv("ROLLING_PRICE_WINDOWS", "4"))  # 4 windows = 1hr (15m each)
-        self._regime_max_price = float(os.getenv("REGIME_MAX_PRICE", "0.62"))  # skip if rolling avg > this
+        self._regime_max_price = float(os.getenv("REGIME_MAX_PRICE", "0.90"))  # skip if rolling avg > this
 
         # Trading hours (UTC) — only trade during high-volatility periods
         self._trading_hours_start = int(os.getenv("TRADING_HOURS_START", "07"))  # 07:00 UTC = EU morning
