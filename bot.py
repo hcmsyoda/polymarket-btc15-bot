@@ -389,9 +389,9 @@ class PolyBot:
         )
 
         # ── Momentum signal: Binance move not yet priced by Polymarket ──
-        # If BTC moved >0.10% on Binance in the last 60s but Polymarket
-        # tokens haven't repriced, this is latency arbitrage alpha.
-        if not signal_result:
+        # Only run inside the same entry window as Brownian (T-60s to T-10s).
+        # Firing at T-280s is too early — the 5-minute window can fully reverse.
+        if not signal_result and self.strategy_config.entry_window_end <= seconds_remaining <= self.strategy_config.entry_window_start:
             mom = self.price_feed.get_momentum(lookback_seconds=60.0)
             if mom["valid"] and abs(mom["pct_change"]) >= 0.10:
                 mom_side = "UP" if mom["pct_change"] > 0 else "DOWN"
