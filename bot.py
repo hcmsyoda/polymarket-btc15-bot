@@ -53,7 +53,7 @@ EXIT_RETRY_COOLDOWN = 10
 
 class PolyBot:
     def __init__(self):
-        load_dotenv()
+        load_dotenv(override=True)
 
         self.dry_run = os.getenv("DRY_RUN", "true").lower() == "true"
         self.period = int(os.getenv("MARKET_PERIOD", "15"))
